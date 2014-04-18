@@ -18,7 +18,7 @@ A nice benefit is that this is much faster than Update Manager ever was...</p>
         /export/ESXi_patch esxihost(rw,async,no_root_squash)
     ls -1 /export/ESXi_patch
         update-from-esxi5.5-5.5_update01.zip
-        VMware-ESXi-5.5.0-1331820-depot.zip</p>
+        VMware-ESXi-5.5.0-1331820-depot.zip
     
     
 <p>You should share it to whatever ESXi hosts you plan on patching. Put all your ESXi depots inside there, they MUST be depots (i.g. ending in .depot.zip or .zip).</p>
