@@ -28,9 +28,13 @@ A nice benefit is that this is much faster than Update Manager ever was...</p>
     See: /usr/lib/vmware-vcli/apps/general/credstore_admin.pl help
     
 <p>4.) To further increase ease of use for the patching script, you should generate ssh keys for root on the vMA. The public key will later be distributed to the ESXi host(s) being patched.</p>
+
+    IMPORTANT: The first run of the script will require you to enter the root password of the ESXi host twice and then every subsequent run after that will leverage the key.
+
 <p>5.) Carefully read and edit the 'patchESXi.conf' file. I have left sample values for your reference.</p>
 <p>6.) Run the patch script: </p>
 
+    Note: If the credstore and ssh keys were not setup, you will have to enter the vcenter-admin password and then the root account password on the ESXi host twice.  Please follow steps 3 and 4 to alleviate this need.
     patchESXi.pl --server vcenter --username vcenter-admin --host esxihost
 
 <p>7.) You can loop through a list of servers and run the patching script in the background for multiple servers at once (this functionality might be included in the script at a later date).</p>
