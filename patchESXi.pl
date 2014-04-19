@@ -23,10 +23,12 @@ Opts::parse();
 Opts::validate();
 
 my $domain = `grep domain patchESXi.conf|cut -d= -f2`;
+$domain =~ /'(.+)'/;
+$domain = $1;
 my $host_name = Opts::get_option('host');
 chomp($host_name, $domain);
 my $hostnm;
-if($domain == '') { $hostnm = $host_name; }else {$host_name =~ /(.+)\.$domain/; $hostnm = $1;}
+if($domain eq '') { $hostnm = $host_name; }elsif ($host_name =~ /(.+)\.$domain/) { $hostnm = $1;}
 my $host_service = "";
 my $timestamp = `date '+%m-%d-%y'`;
 chomp($timestamp);
@@ -125,7 +127,7 @@ my $patch_results= `ssh -q $host_name esxcli software vib install -d $ds_locatio
 
 logger("\n\n$patch_results\n\n");
 logger("Cleaning up NFS mount");
-`ssh -q $host_name "esxcfg-nas -d  $ds_name"`;
+logger(`ssh -q $host_name "esxcfg-nas -d  $ds_name"`);
 
 if($patch_results =~ /.*The update completed successfully.*/) {
 
